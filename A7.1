@@ -1,0 +1,85 @@
+import java.util.Scanner;
+//Adarsh Ravikumar Period 4 APCS
+public class GroceryList
+{
+    //declare variables
+    private double item1;
+    private double item2;
+    private double item3;
+    private double item4;
+    private double item5;
+    Scanner in = new Scanner(System.in);
+    public GroceryList()
+    {
+        //initialize variables
+        item1 = 0;
+        item2 = 0;
+        item3 = 0;
+        item4 = 0;
+        item5 = 0;
+    }
+
+    public double price1()//prompt user
+    {
+        System.out.println("Enter price of item 1: ");
+        item1 = in.nextDouble();
+        return item1;
+    }
+    
+    public double price2()
+    {
+        System.out.println("Enter price of item 2: ");
+        item2 = in.nextDouble();
+        return item2;
+    }
+    
+    public double price3()
+    {
+        System.out.println("Enter price of item 3: ");
+        item3 = in.nextDouble();
+        return item3;
+    }
+    
+    public double price4()
+    {
+        System.out.println("Enter price of item 4: ");
+        item4 = in.nextDouble();
+        return item4;
+    }
+    
+    public double price5()
+    {
+        System.out.println("Enter price of item 5: ");
+        item5 = in.nextDouble();
+        return item5;
+    }
+    
+    public void print()//table thingy with all of the values in them
+    {
+        System.out.println();
+        System.out.printf("%-10s", "Item:");
+        System.out.printf("%5s", "Cost:");
+        System.out.printf("%10s", "Total:");
+        System.out.println();
+        System.out.printf("%5s", "#1");
+        System.out.printf("%10.2f", item1);
+        System.out.printf("%10.2f", item1);
+        System.out.println();
+        System.out.printf("%5s", "#2");
+        System.out.printf("%10.2f", item2);
+        System.out.printf("%10.2f", item1 + item2);
+        System.out.println();
+        System.out.printf("%5s", "#3");
+        System.out.printf("%10.2f", item3);
+        System.out.printf("%10.2f", item1 + item2+ item3);
+        System.out.println();
+        System.out.printf("%5s", "#4");
+        System.out.printf("%10.2f", item4);
+        System.out.printf("%10.2f", item1 + item2 + item3 + item4);
+        System.out.println();
+        System.out.printf("%5s", "#5");
+        System.out.printf("%10.2f", item5);
+        System.out.printf("%10.2f", item1 + item2 + item3 + item4 + item5);
+        System.out.println();
+    }
+}
