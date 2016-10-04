@@ -1,0 +1,39 @@
+import gpdraw.*;
+public class Circle
+{
+    private double myX; double myY; double myRadius;
+    private DrawingTool myPen;
+    private SketchPad myPaper;
+    
+    public Circle(double X, double Y, double A)
+    {
+     myX = X;
+     myY = Y;
+     myRadius = A;
+     myPaper = new SketchPad(500, 500);
+     myPen = new DrawingTool(myPaper);
+    
+     
+    }
+
+    public double getCircumference() //Calculates and returns the circumference of the circle
+    {
+        double circumference = 2*3.14*myRadius;
+        return circumference;
+    }
+    
+    public double getArea() //Calculates and returns the area of the circle
+    {
+        double area = 3.14*myRadius*myRadius;
+        return area;
+    }
+    public void draw()
+    {
+        myPen.up();
+        myPen.move(myX, myY);
+        myPen.down();
+        myPen.drawCircle(myRadius);
+    }
+
+    public Circle (){}
+}
