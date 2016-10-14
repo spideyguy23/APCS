@@ -1,0 +1,33 @@
+public class Recursion
+//Adarsh Ravikumar APCS Period 4
+{
+    public int Fib(int n) //fibonacci sequence
+    {
+        if (n == 0)
+            return 0;
+        else if (n == 1)
+            return 1;
+        else
+            return Fib(n-1) + Fib(n-2);
+    }
+    
+    public int Mult(int x, int y)  //multiplies stuff
+    {
+       if (y == 1)
+       {
+           return x;
+        }
+       else if (y == 0)
+      {
+            return 0;
+        }
+        else if (y < 0)
+        {
+            return -x + Mult(x,y+1);
+        }
+       else
+       {
+           return x+Mult(x, y-1);
+        }
+     }
+}
