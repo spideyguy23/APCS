@@ -1,0 +1,77 @@
+import gpdraw.*;//imports package 
+public class Pictures
+{
+    private DrawingTool myPen;
+    private SketchPad myPaper;
+    public void Rows(int x, int y)
+    {
+        Columns(y);
+        System.out.println("");
+        System.out.println("");
+        int a = x+1;
+        int b = y+1;
+        for(x=1;a!=x;x++)
+            {
+                System.out.print(x);
+                for(y=1;b!=y;y++)
+                {
+                    System.out.printf("%10d",(x*y));
+                }   
+                System.out.println("");
+                
+        }
+            
+    }
+
+    private int RepeatY(int y)
+    {
+        int b = y+1;
+        for (y = 1; b!=y;y++)
+            return y;
+        return y;
+    }
+    private void Columns(int y)
+    {
+        int b = y+1;
+        for (y = 1; b!=y; y++)
+        {
+            System.out.printf("%10d",(y));
+ 
+        }
+    }
+    
+    public void Stars(int x) // x = rows of stars
+    {
+      int numStars = 1+(2*(x-1));
+      int level = 0;
+      int starlevel=1;
+      int spaces=numStars/2;
+      do{
+          for (int y = 0; y < spaces; y++)
+            System.out.print(" ");
+          for (int y = 0;y<starlevel;y++)
+            System.out.print("*");
+          System.out.println(" ");
+          spaces--;
+          starlevel+=2;
+          level++;
+        }while(level!=x);
+        }
+        
+    public void DrawCircle()
+    {
+        myPaper = new SketchPad(500,500);
+        myPen = new DrawingTool(myPaper);
+        for (int x=0; x<360; x++)
+        {
+            myPen.move(0,0);
+            myPen.up();
+            myPen.setDirection(90);
+            myPen.turnRight(x+1);
+            myPen.down();
+            myPen.forward(200);
+    }
+    
+    }
+    
+}
