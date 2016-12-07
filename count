@@ -1,0 +1,32 @@
+//imports packages and stuff for the lab
+import java.io.File;
+import java.io.IOException;
+import java.util.Scanner;
+
+
+public class Nums {
+	
+	public static void average() {//
+		long total = 0;
+		int counter = 0;
+		Scanner in = null;
+		try {
+			in = new Scanner(new File ("numbers.txt"));
+      	while(in.hasNext()){
+			if(in.hasNextInt()){
+				total += in.nextInt();
+				counter ++;
+        }
+		}catch(IOException i) {
+			System.out.println(i.getMessage());
+		}
+		
+	
+			}
+		}
+		System.out.println("Average: " + total/counter);
+	
+	}
+	
+	
+}
