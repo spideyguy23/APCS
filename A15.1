@@ -1,0 +1,62 @@
+import java.awt.geom.*;//import packages for the lab
+import java.util.ArrayList;
+import gpdraw.*;
+
+public class IrregularPolygon{
+   private SketchPad mypaper;
+   private DrawingTool mypencil;
+   private ArrayList <Point2D.Double> myPolygon;
+   private Point2D.Double points;
+   
+   public IrregularPolygon() { //constructor
+      myPolygon = new ArrayList <Point2D.Double> ();
+      mypaper = new SketchPad(600,600);
+      mypencil = new DrawingTool(mypaper);
+    }
+    
+   public void addPoint(double x, double y){ //method for adding the points
+      points = new Point2D.Double(x,y);
+      myPolygon.add(points);
+    } 
+    
+   public void draw() { 
+    mypencil.up();
+    for(int x = 0; x < myPolygon.size()-1; x++){
+         Point2D point = myPolygon.get(x);
+         Point2D point2 = myPolygon.get(x+1);
+         mypencil.up();
+         mypencil.move(point.getX(), point.getY());
+         mypencil.down();
+         mypencil.move(point2.getX(), point2.getY());
+    }
+    int x = myPolygon.size();                                                                                                        
+    Point2D point0 = myPolygon.get(0);
+    mypencil.move(point0.getX(), point0.getY()); //orignal point
+    }
+
+   public double perimeter() {
+   double perimeter = 0;
+   double side = 0;
+   for(int x = 0; x < myPolygon.size()-1; x++){
+         Point2D point = myPolygon.get(x);
+         Point2D point2 = myPolygon.get(x+1);
+         side = Math.sqrt(Math.pow((point2.getX()-point2.getX()),2)+Math.pow((point2.getY()-point.getY()),2));
+         perimeter += side;
+	      if(x > myPolygon.size() - 1) x = 0; //returns to the orignal point
+    } 
+    return 2*perimeter;
+    }
+
+  public double area() { 
+		double area = 0;
+		for(int x = 0; x < myPolygon.size() -1; x++){
+			double x1 =  myPolygon.get(x).getX();
+			double y1 =  myPolygon.get(x).getY();
+			double x2 =  myPolygon.get(x+1).getX();
+			double y2 =  myPolygon.get(x+1).getY();
+			area += (0.5)*(x1*y2 - x2*y1);
+			if(x > myPolygon.size()) x = 0; //returns to the original point
+		}
+		return Math.abs(area);
+	}
+}
