@@ -1,0 +1,82 @@
+import java.util.*;//imports packages for the lab
+import java.io.*;
+public class Statistics
+{
+   private Scanner scan;
+   private ArrayList <Integer> nums;
+
+   
+    public  Statistics(){
+      
+        try{
+        scan = new Scanner(new File("numbers.txt"));//construct scanner
+       
+        nums = new ArrayList <Integer> ();//construct array
+        fillArray();
+      }catch(IOException e){
+        System.out.println(e.getMessage());
+        }
+      
+      
+    }
+    
+    private void fillArray(){
+        while (scan.hasNext()){
+            nums.add(scan.nextInt());
+       }
+}
+   
+    
+    public double average(){//calculate the average
+        long sum = 0;
+      
+        for(Integer i:nums){
+            sum += i;
+            
+        }
+        
+        return sum/(double)nums.size();
+    }
+    
+    public double sD(){//calculate the standard deviation
+        int sum = 0;
+        double avg = average();
+        
+       
+        for (Integer i:nums){
+            sum+= Math.pow(i-avg,2);
+        }
+        
+        return Math.sqrt(sum/nums.size()-1);
+    
+    }
+
+     public int mode(){//calculate the mode
+        int mode = 0;
+        int modeCount = 0;
+        
+        for(int i=0;  i< nums.size();i++){
+            int x = nums.get(i);
+            int tempCount = 1;
+            
+             for(int y : nums){
+              int x2 = nums.get(y);
+            
+            
+            if( x == x2){
+             tempCount++;
+            }
+            
+
+            
+            if( tempCount > modeCount){
+              modeCount = tempCount;
+              mode = x;
+            }
+           }
+            
+        }
+        
+        return mode;
+       }
+    }
