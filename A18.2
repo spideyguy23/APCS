@@ -1,0 +1,55 @@
+import java.util.*;
+public class RecursiveMergeSort {
+    int steps = 0;
+	public void mergeSort(ArrayList <Integer> a, int first, int last) {
+		if(last-first == 0) return;
+		else if(last - first == 1) {
+			if (a.get(first) > a.get(last)) {
+				steps+=4;
+				Integer temp1 = a.get(first);
+				a.set(first, a.get(last));
+				a.set(last, temp1);
+			}
+		}
+		else {
+			int midpoint = (last+first)/2;
+			mergeSort(a,first,midpoint);
+			mergeSort(a,midpoint+1,last); //both array lists, gets pushed up at the end
+			merge(a,first,midpoint,last); //merges the 2 and sorts
+		}	 
+	}
+	
+	public void merge (ArrayList<Integer> a, int first, int midpoint, int last){
+	    int p2 = midpoint+1; //traversing the array
+	    ArrayList<Integer> b = new ArrayList<Integer> (); 
+	    while (b.size()< (last-first+1)) //while the new arraylist is smaller than the given size
+	    { 
+	        if (first >= midpoint){ //left list
+	            b.add(a.get(p2));
+	            p2++; 
+	            steps++;
+            }
+            else if(p2 >= last){//right list
+                b.add(a.get(first));
+                p2++;
+                steps++;
+            }
+            else if(a.get(p2).compareTo(a.get(first)) >= 1){  //see which element from each array is greater
+                b.add(a.get(first)); 
+                first++;
+                steps++;
+            }
+            else{
+                b.add(a.get(p2));
+                p2++;
+                steps++;
+            }      
+        }
+        for (int i = first; i <= last; i++){
+            int bIndex = 0;
+            a.set(i,b.get(bIndex));
+            bIndex++;
+            steps++;
+        }
+    } 
+} 
