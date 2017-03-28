@@ -1,0 +1,87 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Scanner;
+//class that counts words
+public class CountWords 
+{ 
+    private ArrayList <String> words;
+    private ArrayList <Integer> number;
+    
+    public CountWords() {
+        words = new ArrayList <String> ();
+        number = new ArrayList <Integer> ();
+    }
+    
+    public void start(){
+        Scanner fromFile = null;
+        try {
+            fromFile = new Scanner(new File("lincoln.txt"));
+        }catch(IOException x) {
+            System.out.println(x.getMessage());
+        }       
+        while(fromFile.hasNext()) {
+            addToLists(toBasicText(fromFile.next().toLowerCase()));
+        }
+        sortLists();
+        printResults();
+        
+    }
+    
+    private void addToLists(String a) {
+        int temp;
+        boolean inList = false;
+        for(int x = 0; x < words.size(); x++) {
+            if(a.equals(words.get(x)) && !(a.equals("-"))) {
+                temp = number.get(x);
+                temp++;
+                number.set(x,temp);
+                inList = true;
+            }
+        }
+        if(!inList && !(a.equals("-"))) {
+            words.add(a);
+            number.add(1);
+        }
+    }
+
+    public String toBasicText(String a) {
+        if(a.length() == 0) {
+            return "";
+        }
+        if(a.charAt(0) < 97 || a.charAt(0) > 122) {
+            if(a.charAt(0) == 45) { //words with hyphen that counts as one word
+                return a.charAt(0) + toBasicText(a.substring(1));
+            }
+            return toBasicText(a.substring(1));
+        }
+        else return a.charAt(0) + toBasicText(a.substring(1));
+    }
+    
+    public void sortLists(){
+        for (int outer = 0; outer < number.size() - 1; outer++){
+            for (int inner = 0; inner < number.size()-outer-1; inner++){
+              if (number.get(inner) < number.get(inner + 1)){
+                int temp = number.get(inner);
+                String tempString = words.get(inner);
+                number.set(inner, number.get(inner + 1));
+                number.set(inner + 1, temp);
+                words.set(inner, words.get(inner + 1));
+                words.set(inner + 1, tempString);
+              }
+            }
+          }    
+    }
+    public void printResults() {
+        int sum = 0;
+        for(int x = 0; x < number.size(); x++) {
+            sum+=number.get(x);
+        }
+        System.out.println("Number of Unique Words: " + words.size());
+        System.out.println("Number of Words: " + sum + "\n");
+        System.out.println("30 Most Used Words: \n");
+        for(int x = 0; x < 30; x++) {
+            System.out.println("\t#" + (x+1) + ": " + words.get(x) + " (" + number.get(x) + ")");
+        }
+    }
+}
